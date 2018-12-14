@@ -1,0 +1,38 @@
+:root{
+  --red:#e4183e;
+  --black:#231F20;
+  --grey:#d1d2d4;
+}
+
+body {
+  margin: 0px; }
+
+.header {
+  margin-right: 0;
+  margin-left: 0;
+  background-color: lightblue;
+  }
+
+#mainContentContainer{
+  box-sizing: border-box;
+  position: relative;
+  min-height:calc(100% - 82px);
+}
+
+#mainContent{
+  overflow: hidden; /* formally auto. fixed to remove scroll bar from bottom of main div */
+  padding-bottom: 5%;
+  max-width: 96%;
+}
+
+#footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background-color: lightblue;
+  text-align: center;
+  height:100px;
+  clear:both;
+}
+  #footer > p {
+    padding: 30px; }

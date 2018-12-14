@@ -20,7 +20,7 @@ from uuid import uuid4
 from urllib.parse import urlparse
 import requests
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 
 class Blockchain(object):
     def __init__(self):
@@ -59,6 +59,7 @@ class Blockchain(object):
         :param sender: <str> Address of the Sender
         :param recipient: <str> Address of the Recipient
         :param amount: <int> Amount
+        :param cardList: <arr> Array of card names to remove from sender 
         :return: <int> The index of the Block that will hold this transaction
         """
         self.current_transactions.append({
@@ -129,7 +130,7 @@ class Blockchain(object):
     #Method to unregister nodes
     def unregister_node(self, address):
         """
-        Add a new node to the list of nodes
+        Remove a node to the list of nodes
         :param address: <str> Address of node. Eg. 'http://192.168.0.5:5000'
         :return: None
         """
@@ -319,7 +320,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/newTransaction')
-def index():
+def newTransaction():
     return render_template('newTransaction.html')
 
 if __name__ == '__main__':
