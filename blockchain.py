@@ -323,5 +323,9 @@ def index():
 def newTransaction():
     return render_template('newTransaction.html')
 
+@app.route('/addNode')
+def addNode():
+    return render_template('addNode.html')
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
