@@ -3,6 +3,16 @@ Template found online at:
 https://hackernoon.com/learn-blockchains-by-building-one-117428612f46
 """
 
+"""
+Blockchain application made by Danny Mulick for:
+Cloud Computing Fall 2018, Marist College MSCS 621
+
+TODO:
+    update info in blockchain for cards
+    define list of cards and people to start trading
+    create index template
+"""
+
 import hashlib
 import json
 from time import time
