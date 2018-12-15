@@ -32,19 +32,28 @@
     <h1>Trading Card Transactions</h1>
   <div class = "row-fluid" id = "mainContent">
     <div class="container-fluid">
-      <div class = "row">
+      <div class = "row justify-content-md-center">
         <div class = "col-3">
-          <button class = "btn btn-default">Update local version</button>
+          <button class = "btn btn-default" onclick = "displayChain()">Update local version</button>
         </div>
         <div class = "col-3">
-          <button class = "btn btn-default"></button>
-        </div>
-        <div class = "col-3">
-          <button class = "btn btn-default">Update local version</button>
+          <button class = "btn btn-default">Create a Block</button>
         </div>
       </div>
+      <br>
       <div class = "row">
-
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Sender</th>
+              <th scope="col">Recipient</th>
+              <th scope="col">Cards</th>
+            </tr>
+          </thead>
+          <tbody id = "chainTransactions">
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -54,6 +63,34 @@
     <script src="/static/js/bootstrap.min.js"></script>
     <!-- link to custom js file -->
     <script src="/static/js/custom.js"></script>
+    <script>
+      $(document).ready(function(){
+        function displayChain(){
+          let chainUrl='/chain';
+          $.ajax({
+            url:chainUrl,
+            type:"GET",
+            success: function(result){
+              //on success, print current chain of transactions as a table
+              let transactions = result["chain"]["transactions"];
+              let tableBuffer = "";
+              transactions.forEach(function(transaction){
+                tableBuffer += "<tr>";
+                tableBuffer += transaction["sender"];
+                tableBuffer += transaction["recipient"];
+                tableBuffer += transaction["cards"];
+                tableBuffer += "</tr>";
+              })
+              document.getElementById("chainTransactions").innerHTML = tableBuffer;
+            },
+            error:function(error){
+              console.log('Error ${error}');
+            }
+          })
+        }
+      });
 
+
+    </script>
 </body>
 </html>
