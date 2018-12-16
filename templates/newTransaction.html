@@ -85,8 +85,9 @@
           data:JSON.stringify(transJSON),
           processData:false
         }).done(function(result){
+          //Reset transaction form acter successful submission
+          document.getElementById("transactionForm").reset()
           alert(result.message);
-          $("#transactionForm").reset();
         }).fail(function(err){
           alert(err.responseText);
         })
