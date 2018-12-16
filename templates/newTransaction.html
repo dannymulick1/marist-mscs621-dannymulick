@@ -84,8 +84,8 @@
           contentType:'application/json',
           data:JSON.stringify(transJSON),
           processData:false
-        }).done(function(data, textStatus){
-          alert("data:" + data + "/n Status:" + textStatus);
+        }).done(function(result){
+          alert(result.message);
           $("#transactionForm").reset();
         }).fail(function(err){
           alert(err.responseText);
