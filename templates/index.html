@@ -40,7 +40,7 @@
           <button class = "btn btn-default" onclick = "makeBlock()">Mine new block</button>
         </div>
         <div class = "col-3">
-          <button class = "btn btn-default" onclick = "makeBlock()">Mine new block</button>
+          <button class = "btn btn-default" onclick = "resolveChain()">Resolve chain with network</button>
         </div>
       </div>
       <br>
@@ -85,7 +85,7 @@
               transactions.forEach(function(transaction){
                 if (transaction.sender != "0"){
                   tableBuffer += "<tr>";
-                  tableBuffer += "<td></td>";
+                  tableBuffer += "<td scope = 'col'></td>";
                   tableBuffer += "<td>"+transaction["sender"]+"</td>";
                   tableBuffer += "<td>"+transaction["recipient"]+"</td>";
                   tableBuffer += "<td>"+transaction["cards"]+"</td>";
@@ -104,6 +104,19 @@
         let blockUrl='/mine';
         $.ajax({
           url:blockUrl,
+          type:"GET",
+          success: function(result){
+            alert(result.message)
+          },
+          error:function(error){
+            console.log('Error ${error}');
+          }
+        })
+      }
+      function resolveChain(){
+        let resolveUrl='/nodes/resolve';
+        $.ajax({
+          url:resolveUrl,
           type:"GET",
           success: function(result){
             alert(result.message)
