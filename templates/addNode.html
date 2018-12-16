@@ -32,7 +32,15 @@
     <h1>Add New Node IP</h1>
   <div class = "row-fluid" id = "mainContent">
     <div class="container-fluid">
-      
+      <div class = "row justify-content-md-center">
+        <form onsubmit = "postNode()" id = "nodeForm">
+          <div class="form-group row">
+            <label for="nodeIP">Node IPv4 Address</label>
+            <input type="text" class="form-control" id="nodeIP"placeholder="Node IPv4 Address">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -42,6 +50,33 @@
     <script src="/static/js/bootstrap.min.js"></script>
     <!-- link to custom js file -->
     <script src="/static/js/custom.js"></script>
-
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script>
+      $("#nodeForm").submit(function(e) {
+          e.preventDefault();
+      });
+      function postNode(){
+        var transJSON = {
+          nodes:     $("#nodeIP").val()
+        };
+        console.log(transJSON)
+        $.ajax({
+          url:'/transactions/new',
+          type:'POST',
+          contentType:'application/json',
+          data:JSON.stringify(transJSON),
+          processData:false
+        }).done(function(data, textStatus){
+          console.log(data)
+          alert("Status:" + textStatus);
+          $("#transactionForm").reset();
+        }).fail(function(err){
+          alert(err.responseText);
+        })
+      }
+    </script>
 </body>
 </html>

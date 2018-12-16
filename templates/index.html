@@ -34,10 +34,10 @@
     <div class="container-fluid">
       <div class = "row justify-content-md-center">
         <div class = "col-3">
-          <button class = "btn btn-default" onclick = "displayChain()">Update local version</button>
+          <button class = "btn btn-default" onclick = "displayChain()">Show local chain</button>
         </div>
         <div class = "col-3">
-          <button class = "btn btn-default">Create a Block</button>
+          <button class = "btn btn-default" onclick = "makeBlock()">Mine new block</button>
         </div>
       </div>
       <br>
@@ -48,7 +48,7 @@
               <th scope="col"></th>
               <th scope="col">Sender</th>
               <th scope="col">Recipient</th>
-              <th scope="col">Cards</th>
+              <th scope="col">Card(s)</th>
             </tr>
           </thead>
           <tbody id = "chainTransactions">
@@ -63,32 +63,53 @@
     <script src="/static/js/bootstrap.min.js"></script>
     <!-- link to custom js file -->
     <script src="/static/js/custom.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
     <script>
-      $(document).ready(function(){
-        function displayChain(){
-          let chainUrl='/chain';
-          $.ajax({
-            url:chainUrl,
-            type:"GET",
-            success: function(result){
-              //on success, print current chain of transactions as a table
-              let transactions = result["chain"]["transactions"];
-              let tableBuffer = "";
+      function displayChain(){
+        let chainUrl='/chain';
+        $.ajax({
+          url:chainUrl,
+          type:"GET",
+          success: function(result){
+            //on success, print current chain of transactions as a table
+            let blockList = result["chain"];
+            var tableBuffer = "";
+            blockList.forEach(function(block){
+              let transactions = block["transactions"]
               transactions.forEach(function(transaction){
-                tableBuffer += "<tr>";
-                tableBuffer += transaction["sender"];
-                tableBuffer += transaction["recipient"];
-                tableBuffer += transaction["cards"];
-                tableBuffer += "</tr>";
+                if (transaction.sender != "0"){
+                  tableBuffer += "<tr>";
+                  tableBuffer += "<td></td>";
+                  tableBuffer += "<td>"+transaction["sender"]+"</td>";
+                  tableBuffer += "<td>"+transaction["recipient"]+"</td>";
+                  tableBuffer += "<td>"+transaction["cards"]+"</td>";
+                  tableBuffer += "</tr>";
+                }
               })
-              document.getElementById("chainTransactions").innerHTML = tableBuffer;
-            },
-            error:function(error){
-              console.log('Error ${error}');
-            }
-          })
-        }
-      });
+            })
+            document.getElementById("chainTransactions").innerHTML = tableBuffer;
+          },
+          error:function(error){
+            console.log('Error ${error}');
+          }
+        })
+      }
+      function makeBlock(){
+        let blockUrl='/mine';
+        $.ajax({
+          url:blockUrl,
+          type:"GET",
+          success: function(result){
+            alert(result.message)
+          },
+          error:function(error){
+            console.log('Error ${error}');
+          }
+        })
+      }
 
 
     </script>
