@@ -69,8 +69,8 @@
           contentType:'application/json',
           data:JSON.stringify(transJSON),
           processData:false
-        }).done(function(data, textStatus){
-          console.log(data)
+        }).done(function(result){
+          console.log(result.message)
           alert(textStatus);
           $("#nodeForm").reset();
         }).fail(function(err){
