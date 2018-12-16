@@ -221,7 +221,7 @@ def mine():
     blockchain.new_transaction(
         sender="0",
         recipient=node_identifier,
-        amount=1,
+        cards=[],
     )
 
     # Forge the new Block by adding it to the chain
@@ -240,14 +240,13 @@ def mine():
 @app.route('/transactions/new', methods=['POST'])
 def new_transaction():
     values = request.get_json()
-
     # Check that the required fields are in the POST'ed data
-    required = ['sender', 'recipient', 'amount']
+    required = ['sender', 'recipient', 'cards']
     if not all(k in values for k in required):
         return 'Missing values', 400
 
     # Create a new Transaction
-    index = blockchain.new_transaction(values['sender'], values['recipient'], values['amount'])
+    index = blockchain.new_transaction(values['sender'], values['recipient'], values['cards'])
 
     response = {'message': f'Transaction will be added to Block {index}'}
     return jsonify(response), 201
