@@ -124,7 +124,13 @@ class Blockchain(object):
         """
 
         parsed_url = urlparse(address)
-        self.nodes.add(parsed_url.netloc)
+        if parsed_url.netloc:
+            self.nodes.add(parsed_url.netloc)
+        elif parsed_url.path:
+            # Accepts an URL without scheme like '192.168.0.5:5000'.
+            self.nodes.add(parsed_url.path)
+        else:
+            raise ValueError('Invalid URL')
 
     #Method to unregister nodes
     def unregister_node(self, address):
@@ -327,11 +333,3 @@ def addNode():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-
-def app(environ, start_response):
-        data = b"Hello, World!\n"
-        start_response("200 OK", [
-            ("Content-Type", "text/plain"),
-            ("Content-Length", str(len(data)))
-        ])
-        return iter([data])
