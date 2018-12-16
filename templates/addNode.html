@@ -60,19 +60,19 @@
       });
       function postNode(){
         var transJSON = {
-          nodes:     $("#nodeIP").val()
+          "nodes":     [$("#nodeIP").val()],
         };
         console.log(transJSON)
         $.ajax({
-          url:'/transactions/new',
+          url:'/nodes/register',
           type:'POST',
           contentType:'application/json',
           data:JSON.stringify(transJSON),
           processData:false
         }).done(function(data, textStatus){
           console.log(data)
-          alert("Status:" + textStatus);
-          $("#transactionForm").reset();
+          alert(textStatus);
+          $("#nodeForm").reset();
         }).fail(function(err){
           alert(err.responseText);
         })
