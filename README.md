@@ -25,4 +25,4 @@ The ```/addNode``` page exists to allow users to add nodes to the local neighbor
 Future improvement could be to have chains poll other nodes for extensive connections through the network, creating a true P2P web with 100% connectivity across each node, or research methods of network connection to ensure higher reliability of the network.
 
 ## Architecture Diagram
-To be added later
+[See here](https://github.com/dannymulick1/marist-mscs621-dannymulick/blob/master/MSCS%20621%20-%20Blockchain%20Diagram.pdf)
