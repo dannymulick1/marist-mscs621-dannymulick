@@ -19,9 +19,11 @@ After installing all dependencies, either run ```python blockchain.py``` or ```p
 The index page allows the user to display the current local chain, mine new blocks to verify transactions, and check the network to see if its local chain is authoritative or if it should obtain the authoritative chain from the network.
 
 The ```/newTransaction``` page allows the user to submit transactions in the form of sender, recipient, and card list requests through the web form. Currently, there is no content control over what can be submitted as a sender or a recipient. In addition, there is only a small set of cards that can be selected from in the web form.
+
 Future expansions on this blockchain would likely include access to either other databases to contain lists of valid cards and users, or dynamically allow insertion of new accepted values as the chain grows.
 
 The ```/addNode``` page exists to allow users to add nodes to the local neighbor array of the current node. Adding neighbors lets the current node poll more versions of the blockchain to determine if its local chain is authoritative. Expected input for this page is ```ipAddress:portNum``` with ipAddress being either a DNS name or the IPv4 address of another node.
+
 Future improvement could be to have chains poll other nodes for extensive connections through the network, creating a true P2P web with 100% connectivity across each node, or research methods of network connection to ensure higher reliability of the network.
 
 ## Architecture Diagram
