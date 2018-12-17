@@ -71,7 +71,7 @@
           processData:false
         }).done(function(result){
           console.log(result.message)
-          alert(textStatus);
+          alert(result.message);
           $("#nodeForm").reset();
         }).fail(function(err){
           alert(err.responseText);
